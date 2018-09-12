@@ -323,17 +323,23 @@ void reqOrderBookList(evhtp_request_t * req, void * arg)
 
 			// output best bid/ask
 			if (depth == 1) {
-				auto ask = agg_asks.begin();
-				UniValue askObj(UniValue::VOBJ);
-				askObj.pushKV("price", (int64_t) ask->first);
-				askObj.pushKV("qty", (int64_t) ask->second);
-				asksArr.push_back(askObj);
+				if (agg_asks.size() > 0)
+				{
+					auto ask = agg_asks.begin();
+					UniValue askObj(UniValue::VOBJ);
+					askObj.pushKV("price", (int64_t) ask->first);
+					askObj.pushKV("qty", (int64_t) ask->second);
+					asksArr.push_back(askObj);
+				}
 
-				auto bid = agg_bids.rbegin();
-				UniValue bidObj(UniValue::VOBJ);
-				bidObj.pushKV("price", (int64_t) bid->first);
-				bidObj.pushKV("qty", (int64_t) bid->second);
-				bidsArr.push_back(bidObj);
+				if (agg_bids.size() > 0)
+				{
+					auto bid = agg_bids.rbegin();
+					UniValue bidObj(UniValue::VOBJ);
+					bidObj.pushKV("price", (int64_t) bid->first);
+					bidObj.pushKV("qty", (int64_t) bid->second);
+					bidsArr.push_back(bidObj);
+				}
 
 			// output aggregated order book
 			} else {

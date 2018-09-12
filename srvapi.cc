@@ -271,8 +271,9 @@ void reqOrderBookList(evhtp_request_t * req, void * arg)
 	if (!reqPreProcessing(req, state))
 		return;		// pre-processing failed; response already sent
 
-	// obtain symbol from uri regex matched substring
-	string inSymbol(req->uri->path->match_start);
+	// obtain symbol from url by removing first six letters "/book/"
+	string inSymbol(req->uri->path->full);
+	inSymbol = inSymbol.substr(6);
 
 	// depth=N query param.  valid: 1-3, default 1.
 	int64_t depth;

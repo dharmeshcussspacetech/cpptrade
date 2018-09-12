@@ -76,7 +76,8 @@ void reqOrderInfo(evhtp_request_t * req, void *arg)
 	if (!reqPreProcessing(req, state))
 		return;		// pre-processing failed; response already sent
 
-	string orderId(req->uri->path->match_start);
+	string orderId(req->uri->path->full);
+	orderId = orderId.substr(7); // to remove preceding "/order/"
 
 	OrderPtr order;
 	OrderBookPtr book;

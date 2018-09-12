@@ -360,7 +360,7 @@ static std::vector<struct HttpApiEntry> apiRegistry = {
 	{ true,  "/orderAdd",		false, reqOrderAdd, true, true },
 	{ true,  "/orderCancel",	false, reqOrderCancel, true, true },
 	{ true,  "/orderModify",	false, reqOrderModify, true, true },
-	{ true,  "/order",		true, reqOrderInfo, true, true }, //pattern matching is not working so disabled it
+	{ true,  "/order",		false, reqOrderInfo, true, true }, //pattern matching is not working so disabled it
 };
 
 int main(int argc, char ** argv)
